@@ -1,0 +1,18 @@
+$ npm init
+$ npm install electron electron-rebuild electron-panel-window -save
+
+Rebuild the electron-panel-window module for our versions
+
+$ ./node_modules/.bin/electron-rebuild
+
+Create main.js, index.html and preload.js as required.
+
+Add this to "scripts" section of package.json:
+
+```json
+    "start": "electron .",
+```
+
+Then run:
+
+$ npm start

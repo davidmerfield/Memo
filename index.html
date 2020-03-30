@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hole</title>
+  </head>
+  <style>
+    html {
+      background: #000;
+      color: yellow;
+    }
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      -webkit-app-region: drag;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    textarea:focus,
+    input:focus {
+      outline: none;
+    }
+  </style>
+  <body>
+    <input
+      id="entry"
+      autofocus
+      type="text"
+      style="font-size:2rem;background: none;color:inherit;flex-grow:1;border:none;padding: 1rem;margin: 0"
+    />
+    <script type="text/javascript">
+      const entry = document.getElementById("entry");
+
+      entry.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+          window.addEntry(entry.value);
+          entry.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>
