@@ -1,3 +1,8 @@
+Use some of the how-to language for this app:
+
+https://remember.defn.io/
+https://github.com/Bogdanp/remember
+
 $ npm init
 $ npm install electron electron-rebuild electron-panel-window -save
 
