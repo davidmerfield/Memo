@@ -1,34 +1,35 @@
-var app = require("electron").app;
-const globalShortcut = require("electron").globalShortcut;
-const { BrowserWindow } = require('electron')
-var mainWindow = null;
+const { app, globalShortcut, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+let mainWindow = null;
 
 app.dock.hide();
 
-app.on("ready", function() {
+app.on("ready", function () {
   mainWindow = new BrowserWindow({
+    frame: false,
+    show: false,
     center: true,
     width: 600,
     height: 100,
     minHeight: 100,
-    frame: false,
     minWidth: 100,
-    show: false,
-    type: 'panel',
-    // webPreferences: {
-    //   preload: path.join(app.getAppPath(), "preload.js")
-    // }
+    type: "panel",
+    webPreferences: {
+      nodeIntegration: true,
+      preload: path.join(app.getAppPath(), "preload.js"),
+    },
   });
 
-  mainWindow.loadURL("file://" + __dirname + "/index.html");
+  mainWindow.loadURL("file://" + path.join(app.getAppPath(), "index.html"));
 
-  mainWindow.on("closed", function() {
+  ipcMain.handle("ping", () => mainWindow.hide());
+
+  mainWindow.on("closed", function () {
     mainWindow = null;
   });
 
-  mainWindow.on("ready-to-show", function() {
-    // mainWindow.webContents.openDevTools();
+  mainWindow.on("ready-to-show", function () {
+    mainWindow.webContents.openDevTools();
 
     let hidden = true;
 

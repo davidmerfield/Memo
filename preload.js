@@ -1,11 +1,13 @@
-const { remote } = require("electron");
 const fs = require("fs");
+const { contextBridge, ipcRenderer } = require("electron");
 
-window.addEntry = function(text) {
-	fs.appendFileSync(
-		__dirname + "/Hello.txt",
-		"\n[" + new Date() + "] " + text,
-		"utf-8"
-	);
-	remote.getCurrentWindow().hide();
-};
+contextBridge.exposeInMainWorld("memo", {
+  addEntry: function (text) {
+    fs.appendFileSync(
+      __dirname + "/Hello.txt",
+      "\n[" + new Date() + "] " + text,
+      "utf-8"
+    );
+    ipcRenderer.invoke('ping');
+  },
+});

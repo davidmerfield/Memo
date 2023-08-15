@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hole</title>
+    <title>Memo</title>
   </head>
   <style>
     html {
@@ -38,7 +38,7 @@
       entry.addEventListener("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode === 13) {
-          window.addEntry(entry.value);
+          window.memo.addEntry(entry.value);
           entry.value = "";
         }
       });
